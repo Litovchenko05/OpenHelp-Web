@@ -58,23 +58,22 @@ public class UserServletController extends HttpServlet{
         logger.info("req : " + req.getParameter("name"));
         switch(route) {
             case "add"-> {
-                String name = req.getParameter("name");
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
                 String email = req.getParameter("email");
-                logger.info(name,username,password,email);
+                String name = req.getParameter("name");
+                logger.info(username,password,email,name);
 
                 User newUser = new User(username, password, email, name);
 
-                //Hardcodeo una peli
-                Pelicula hardMovie = new Pelicula("hard", "hard", "hard", 88, 88, (byte)3, director);
-                PeliculaDAO.insertar(hardMovie);
+                //Hardcode an User
+                User hardUser = new User("Peposo", "cumbiapeposa1234", "pepoeventos@gmail.com", "El Pepo");
+                UserDAO.insert(hardUser);
 
                 res.setContentType("application/json; charset=UTF-8");
                 Map<String, String> response = new HashMap();
-                response.put("message", "Película guardada exitosamente!!!");
+                response.put("message", "User saved successfully!!!");
                 mapper.writeValue(res.getWriter(), response);
-
             }
         }
     }
