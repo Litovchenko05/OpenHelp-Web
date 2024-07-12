@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
             </tr>
           `
                 });
-            });
+                let table = new DataTable("#users");
+            })
+    .catch(error => console.error("Error fetching data: ", error));
     }
     loadUsersList();
 });
