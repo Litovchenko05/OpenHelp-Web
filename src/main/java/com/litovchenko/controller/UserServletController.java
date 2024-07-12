@@ -42,7 +42,7 @@ public class UserServletController extends HttpServlet{
             }
 
             default -> {
-                System.out.println("Parámetro no válido");
+                System.out.println("Invalid parameter");
             }
         }
     }
