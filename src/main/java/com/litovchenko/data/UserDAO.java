@@ -26,7 +26,6 @@ public class UserDAO {
         Connection cn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        User user = null;
         List<User> usersList = new ArrayList<>();
 
         try{
@@ -38,22 +37,21 @@ public class UserDAO {
             //Then I get the attributes of every single user and set it into the object user
             //Finally I save each user in the ArrayList
             while(rs.next()){
-                int id = rs.getInt("id");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 String email = rs.getString("email");
                 String name = rs.getString("name");
 
-                user = new User(id, username, password, email, name);
+                User user = new User(username, password, email, name);
                 usersList.add(user);
             }
         } catch (SQLException e){
             e.printStackTrace(System.out);
         } finally {
             try{
-                close(rs);
-                close(ps);
-                close(cn);
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (cn != null) cn.close();
             } catch (Exception e){
                 e.printStackTrace(System.out);
             }
