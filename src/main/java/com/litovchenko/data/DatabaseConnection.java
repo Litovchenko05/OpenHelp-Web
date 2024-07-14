@@ -14,7 +14,16 @@ public class DatabaseConnection {
     private final static String USER = "root";
 
     //Enter the password of the user to access into the database MySQL
-    private final static String PASSWORD = "here goes the password";
+    private final static String PASSWORD = "here goes a password";
+
+    static {
+        try {
+            // Load and register the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace(System.out);
+        }
+    }
 
     public static DataSource getDataSource() {
         BasicDataSource ds = new BasicDataSource();
@@ -27,13 +36,6 @@ public class DatabaseConnection {
 
     public static Connection getDatabaseConnection() throws SQLException {
         Connection con = getDataSource().getConnection();
-        try {
-            //Here it goes the code that will handle the exception
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-        } catch(ClassNotFoundException e){
-            e.printStackTrace(System.out);
-        }
         return con;
     }
 
